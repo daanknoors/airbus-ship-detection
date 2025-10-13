@@ -209,3 +209,8 @@ __marimo__/
 # macos local dev
 .DS_Store
 .idea/
+
+#ml
+*.pt
+*.pth
+models/

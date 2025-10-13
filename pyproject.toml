@@ -6,9 +6,9 @@ authors = [
     {name = "daanknoors",email = "d.knoors@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.14"
 dependencies = [
-    "numpy (>=2.3.3,<3.0.0)",
+    "numpy (==2.2)",
     "pandas (>=2.3.3,<3.0.0)",
     "matplotlib (>=3.10.6,<4.0.0)",
     "seaborn (>=0.13.2,<0.14.0)",
@@ -16,7 +16,13 @@ dependencies = [
     "jupyterlab (>=4.4.9,<5.0.0)",
     "polars (>=1.34.0,<2.0.0)",
     "plotly (>=6.3.1,<7.0.0)",
-    "pyarrow (>=21.0.0,<22.0.0)"
+    "pyarrow (>=21.0.0,<22.0.0)",
+    "torch (>=2.8.0,<3.0.0)",
+    "torchvision (>=0.23.0,<0.24.0)",
+    "opencv-python (>=4.12.0.88,<5.0.0.0)",
+    "scikit-image (>=0.25.2,<0.26.0)",
+    "scikit-learn (>=1.7.2,<2.0.0)",
+    "segmentation-models-pytorch (>=0.5.0,<0.6.0)"
 ]
 
 
