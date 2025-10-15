@@ -4,31 +4,6 @@ import glob
 import os
 import segmentation_models_pytorch as smp
 
-MODELS = {
-    'UNET': smp.Unet(),
-    'UNETPlusPlus': smp.UnetPlusPlus(),
-    'UNET_RESNET34ImgNet': smp.Unet(encoder_name="resnet34", encoder_weights="imagenet", activation=None),
-}
-
-    
-def get_model(model_name, run_description=None, time_stamp=None):
-    model = get_pretrained_model(model_name)
-    if run_description:
-        # lookf for all files with the run description and get the latest one
-        if time_stamp is None:
-            list_of_files = glob.glob(f'{model_name}_{run_description}_*.pt')
-            if not list_of_files:
-                raise FileNotFoundError(f"No model files found for {model_name} with description {run_description}")
-            latest_file = max(list_of_files, key=os.path.getctime)
-            model_path = latest_file
-        else:   
-            model_path = f'{model_name}_{run_description}_{time_stamp}.pt'
-            if not os.path.exists(model_path):
-                raise FileNotFoundError(f"No model file found for {model_name} with description {run_description} and timestamp {time_stamp}")
-        print(f"Loading trained model from {model_path}")
-        state = torch.load(model_path)
-        model.load_state_dict(state['model'])
-    return model
 
 
 
@@ -68,9 +43,9 @@ class UNet_up_block(torch.nn.Module):
         return x
 
 
-class UNet(torch.nn.Module):
+class Unet_Custom(torch.nn.Module):
     def __init__(self):
-        super(UNet, self).__init__()
+        super(Unet_Custom, self).__init__()
 
         self.down_block1 = UNet_down_block(3, 64, False)
         self.down_block2 = UNet_down_block(64, 128, True)
@@ -97,3 +72,11 @@ class UNet(torch.nn.Module):
         x = self.up_block4(self.x1, x)
         x = self.last_conv(x)
         return x
+    
+
+MODELS = {
+    'UNET': smp.Unet(),
+    'UNETPlusPlus': smp.UnetPlusPlus(),
+    'UNET_RESNET34ImgNet': smp.Unet(encoder_name="resnet34", encoder_weights="imagenet", activation=None),
+    'UNET_CUSTOM': Unet_Custom()
+}

@@ -98,10 +98,10 @@ def validation(model: nn.Module, criterion, valid_loader, metrics):
         metrics.collect(outputs.detach().cpu(), targets.detach().cpu()) # get metrics 
     
     valid_loss = np.mean(losses)  # float
-    valid_iou, valid_dice, valid_jaccard = metrics.get() # float
+    valid_mean_f2score, valid_dice, valid_jaccard = metrics.get() # float
 
-    print('Valid loss: {:.5f}, IoU: {:.5f}, Jaccard: {:.5f}, Dice: {:.5f}'.format(valid_loss, valid_iou, valid_jaccard, valid_dice))
-    comb_loss_metrics = {'valid_loss': valid_loss, 'iou': valid_iou.item(), 'jaccard': valid_jaccard.item(), 'dice': valid_dice.item()}
+    print('Valid loss: {:.5f}, Mean F2: {:.5f}, Jaccard: {:.5f}, Dice: {:.5f}'.format(valid_loss, valid_mean_f2score, valid_jaccard, valid_dice))
+    comb_loss_metrics = {'valid_loss': valid_loss, 'mean_f2': valid_mean_f2score.item(), 'jaccard': valid_jaccard.item(), 'dice': valid_dice.item()}
 
     return comb_loss_metrics
 

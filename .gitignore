@@ -56,7 +56,6 @@ cover/
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -209,8 +208,5 @@ __marimo__/
 # macos local dev
 .DS_Store
 .idea/
-
-#ml
+archive/
 *.pt
-*.pth
-models/
